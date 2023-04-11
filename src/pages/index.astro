@@ -1,0 +1,47 @@
+---
+import LayoutPage from '../layouts/LayoutPage.astro';
+
+import Section from '../components/Section.astro';
+import Container from '../components/Container.astro';
+
+import '../styles/global.css';
+
+const files = await Astro.glob('../../archives/*.json');
+const archives = files.map( file => {
+  const data = file.default;
+  return data;
+})
+console.log('archives', archives)
+---
+
+<LayoutPage>
+  <h1 class="sr-only">Space Jelly Archive</h1>
+  <Section>
+    <Container>
+      <ul class="grid">
+        {archives.map(archive => {
+          return (
+            <li>
+              <img width={archive.image.width} height={archive.image.height} src={archive.image.url} alt="Screenshot" />
+              <p>{ new Date(archive.date).toLocaleString() }</p>
+            </li>
+          )
+        })}
+      </ul>
+    </Container>
+  </Section>
+</LayoutPage>
+
+<style lang="scss">
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2em;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  @media (min-width: 720px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+</style>

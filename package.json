@@ -1,0 +1,24 @@
+{
+  "name": "my-web-archive",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^2.2.2",
+    "astro-icon": "^0.8.0",
+    "cloudinary": "^1.35.0",
+    "sass": "^1.61.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "dotenv": "^16.0.3",
+    "playwright": "^1.32.3",
+    "postcss": "^8.4.21"
+  }
+}

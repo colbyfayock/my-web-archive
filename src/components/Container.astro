@@ -1,0 +1,39 @@
+---
+const { class: userClass } = Astro.props;
+
+let className = 'container';
+
+if ( userClass ) {
+  className = `${className} ${userClass}`;
+}
+---
+<div class={className}>
+  <slot />
+</div>
+
+<style lang="scss">
+.container {
+  width: 100%;
+  max-width: 1024px;
+  padding: 0 2em;
+  margin: 0 auto;
+
+  @media (max-width: 720px) {
+    padding: 0 1em;
+  }
+
+  h2,
+  h3,
+  h4,
+  p,
+  ul {
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+</style>
