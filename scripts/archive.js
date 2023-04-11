@@ -28,7 +28,9 @@ await page.screenshot({
 
 await browser.close();
 
-const results = await cloudinary.uploader.upload(screenshotPath);
+const results = await cloudinary.uploader.upload(screenshotPath, {
+  folder: 'my-web-archive'
+});
 
 const archive = {
   url,
