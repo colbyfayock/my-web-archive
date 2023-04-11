@@ -7,11 +7,11 @@ import Container from '../components/Container.astro';
 import '../styles/global.css';
 
 const files = await Astro.glob('../../archives/*.json');
+
 const archives = files.map( file => {
   const data = file.default;
   return data;
 })
-console.log('archives', archives)
 ---
 
 <LayoutPage>
