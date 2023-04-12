@@ -9,11 +9,23 @@ import Footer from '../components/Footer.astro';
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro</title>
+		<style>
+			.layout {
+				display: grid;
+				grid-template-rows: auto 1fr auto;
+				overflow: hidden;
+				min-height: 100vh;
+			}
+
+			.main {
+				padding: 0 0 3em;
+			}
+		</style>
 	</head>
 	<body>
-		<div class="grid grid-rows-[auto 1fr auto] overflow-hidden min-h-screen">
+		<div class="layout">
 			<Header />
-			<main class="p-0 pb-3">
+			<main class="main">
 				<slot />
 			</main>
 			<Footer />
