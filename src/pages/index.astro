@@ -1,4 +1,6 @@
 ---
+import { Cloudinary } from '@cloudinary/url-gen';
+import { getPublicId } from '@cloudinary-util/util';
 import LayoutPage from '../layouts/LayoutPage.astro';
 
 import Section from '../components/Section.astro';
@@ -6,12 +8,18 @@ import Container from '../components/Container.astro';
 
 import '../styles/global.css';
 
+const cld = new Cloudinary({
+  cloud: {
+    cloudName: import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME
+  }
+});
+
 const files = await Astro.glob('../../archives/*.json');
 
 const archives = files.map( file => {
   const data = file.default;
   return data;
-})
+});
 ---
 
 <LayoutPage>
@@ -20,9 +28,19 @@ const archives = files.map( file => {
     <Container>
       <ul class="grid">
         {archives.map(archive => {
+          const width = 800;
+          const height = 600;
+          const publicId = getPublicId(archive.image.url);
+          const url = cld.image(publicId)
+                          .format('auto')
+                          .quality('auto')
+                          .addTransformation(`w_${width},h_${height},c_fill,g_north`)
+                          .toURL();
           return (
             <li>
-              <img width={archive.image.width} height={archive.image.height} src={archive.image.url} alt="Screenshot" />
+              <a href={archive.image.url}>
+                <img width={width} height={height} src={url} alt="Screenshot" />
+              </a>
               <p>{ new Date(archive.date).toLocaleString() }</p>
             </li>
           )
